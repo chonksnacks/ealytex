@@ -62,7 +62,7 @@ nav.scrolled {
   transform: translateY(-50%);
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(160px, 22vw, 340px);
-  color: rgba(242,237,230,0.06);
+  color: rgba(242,237,230,0.11);
   letter-spacing: -0.02em;
   pointer-events: none;
   white-space: nowrap; line-height: 1;
@@ -157,15 +157,16 @@ section { padding: 140px 56px; }
 #clients { background: var(--ink); padding: 100px 0; }
 .clients-head { padding: 0 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 60px; }
 .clients-sub { font-size: 14px; line-height: 1.8; color: rgba(242,237,230,0.5); }
-.marquee-outer { overflow: hidden; width: 100%; position: relative; padding: 0; border-top: 1px solid rgba(184,154,106,0.2); border-bottom: 1px solid rgba(184,154,106,0.2); background: #f5f0e8; }
-.marquee-outer::before, .marquee-outer::after { content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2; pointer-events: none; }
-.marquee-outer::before { left: 0; background: linear-gradient(to right, #f5f0e8, transparent); }
-.marquee-outer::after { right: 0; background: linear-gradient(to left, #f5f0e8, transparent); }
+.marquee-outer { overflow: hidden; width: 100%; position: relative; padding: 0; border-top: 1px solid rgba(184,154,106,0.2); border-bottom: 1px solid rgba(184,154,106,0.2); background: #111009; }
+.marquee-outer::before, .marquee-outer::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
+.marquee-outer::before { left: 0; background: linear-gradient(to right, #111009, transparent); }
+.marquee-outer::after { right: 0; background: linear-gradient(to left, #111009, transparent); }
 .marquee-track { display: flex; align-items: center; width: max-content; animation: logoScroll 50s linear infinite; }
 .marquee-track:hover { animation-play-state: paused; }
-.logo-slide { display: flex; align-items: center; justify-content: center; padding: 20px 40px; height: 88px; flex-shrink: 0; border-right: 1px solid rgba(0,0,0,0.06); transition: background 0.3s; }
-.logo-slide:hover { background: rgba(184,154,106,0.12); }
-.logo-slide img { height: 36px; width: auto; max-width: 140px; object-fit: contain; mix-blend-mode: multiply; }
+.logo-slide { display: flex; align-items: center; justify-content: center; padding: 20px 44px; height: 88px; flex-shrink: 0; border-right: 1px solid rgba(255,255,255,0.04); transition: background 0.3s; }
+.logo-slide:hover { background: rgba(184,154,106,0.08); }
+.logo-slide img { height: 36px; width: auto; max-width: 140px; object-fit: contain; mix-blend-mode: screen; opacity: 0.85; transition: opacity 0.3s; }
+.logo-slide:hover img { opacity: 1; }
 
 /* ADVANTAGES */
 #advantages { background: var(--cream); color: var(--ink); }
@@ -623,7 +624,7 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
   <h2 class="section-heading reveal rd1">We'd Love to <em>Hear</em> From You</h2>
   <div class="contact-layout">
     <div class="contact-info">
-      <div class="reveal"><div class="c-label">Email</div><div class="c-val"><a href="/cdn-cgi/l/email-protection#573e3931381732363b2e23322f7934383a"><span class="__cf_email__" data-cfemail="3f565159507f5a5e53464b5a47115c5052">[email&#160;protected]</span></a></div></div>
+      <div class="reveal"><div class="c-label">Email</div><div class="c-val"><a href="mailto:info@ealytex.com">info@ealytex.com</a></div></div>
       <div class="reveal rd1"><div class="c-label">Phone</div><div class="c-val"><a href="tel:+12129679888">+1 (212) 967-9888</a></div></div>
       <div class="reveal rd2"><div class="c-label">Website</div><div class="c-val"><a href="http://www.ealytexglobalinc.com">www.ealytexglobalinc.com</a></div></div>
     </div>
@@ -646,60 +647,27 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
   </ul>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Smart logo blend mode — detect dark vs light bg per image
-  function fixLogoBlend(img) {
-    if (!img.complete || img.naturalWidth === 0) return;
-    try {
-      const canvas = document.createElement('canvas');
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0);
-      // Sample corners to detect background color
-      const corners = [
-        ctx.getImageData(0, 0, 1, 1).data,
-        ctx.getImageData(img.naturalWidth - 1, 0, 1, 1).data,
-        ctx.getImageData(0, img.naturalHeight - 1, 1, 1).data,
-        ctx.getImageData(img.naturalWidth - 1, img.naturalHeight - 1, 1, 1).data,
-      ];
-      let darkCorners = 0;
-      corners.forEach(px => {
-        const brightness = (px[0] + px[1] + px[2]) / 3;
-        const alpha = px[3];
-        if (alpha > 200 && brightness < 80) darkCorners++;
-      });
-      if (darkCorners >= 2) {
-        img.style.mixBlendMode = 'screen';
-        img.style.filter = 'brightness(0.9)';
-      } else {
-        img.style.mixBlendMode = 'multiply';
-      }
-    } catch(e) {
-      // cross-origin fallback — just use multiply
-      img.style.mixBlendMode = 'multiply';
-    }
-  }
-  document.querySelectorAll('.logo-slide img').forEach(img => {
-    if (img.complete) fixLogoBlend(img);
-    else img.addEventListener('load', () => fixLogoBlend(img));
-  });
+<script>
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 
-  // Scroll reveal
-  function reveal() {
-    document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
-      if (el.getBoundingClientRect().top < window.innerHeight - 50) {
-        el.classList.add('visible');
+  // Scroll reveal — IntersectionObserver is way more reliable than scroll events
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
       }
     });
-  }
-  window.addEventListener('scroll', reveal, { passive: true });
-  reveal();
-  setTimeout(reveal, 200);
-  setTimeout(reveal, 600);
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // Fallback: force-reveal everything after 2.5s in case observer misfires
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+  }, 2500);
 
   // Hero
