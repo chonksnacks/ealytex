@@ -157,16 +157,16 @@ section { padding: 140px 56px; }
 #clients { background: var(--ink); padding: 100px 0; }
 .clients-head { padding: 0 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 60px; }
 .clients-sub { font-size: 14px; line-height: 1.8; color: rgba(242,237,230,0.5); }
-.marquee-outer { overflow: hidden; width: 100%; position: relative; padding: 16px 0; border-top: 1px solid rgba(184,154,106,0.1); border-bottom: 1px solid rgba(184,154,106,0.1); }
+.marquee-outer { overflow: hidden; width: 100%; position: relative; padding: 0; border-top: 1px solid rgba(184,154,106,0.2); border-bottom: 1px solid rgba(184,154,106,0.2); background: #f5f0e8; }
 .marquee-outer::before, .marquee-outer::after { content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2; pointer-events: none; }
-.marquee-outer::before { left: 0; background: linear-gradient(to right, var(--ink), transparent); }
-.marquee-outer::after { right: 0; background: linear-gradient(to left, var(--ink), transparent); }
+.marquee-outer::before { left: 0; background: linear-gradient(to right, #f5f0e8, transparent); }
+.marquee-outer::after { right: 0; background: linear-gradient(to left, #f5f0e8, transparent); }
 .marquee-track { display: flex; align-items: center; width: max-content; animation: logoScroll 50s linear infinite; }
 .marquee-track:hover { animation-play-state: paused; }
-.logo-slide { display: flex; align-items: center; justify-content: center; padding: 14px 36px; height: 76px; flex-shrink: 0; border-right: 1px solid rgba(184,154,106,0.08); transition: background 0.3s; }
-.logo-slide:hover { background: rgba(184,154,106,0.04); }
-.logo-slide img { height: 30px; width: auto; max-width: 120px; object-fit: contain; filter: grayscale(1) brightness(2); opacity: 0.38; transition: opacity 0.3s, filter 0.3s; }
-.logo-slide:hover img { opacity: 0.85; filter: grayscale(0) brightness(1); }
+.logo-slide { display: flex; align-items: center; justify-content: center; padding: 20px 40px; height: 88px; flex-shrink: 0; border-right: 1px solid rgba(0,0,0,0.06); transition: background 0.3s; }
+.logo-slide:hover { background: rgba(184,154,106,0.12); }
+.logo-slide img { height: 32px; width: auto; max-width: 130px; object-fit: contain; filter: grayscale(1) brightness(0.3); opacity: 0.7; transition: opacity 0.3s, filter 0.3s; }
+.logo-slide:hover img { opacity: 1; filter: grayscale(0) brightness(1); }
 
 /* ADVANTAGES */
 #advantages { background: var(--cream); color: var(--ink); }
