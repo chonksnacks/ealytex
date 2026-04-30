@@ -379,7 +379,8 @@ section { padding: 140px 56px; }
 .products-sub { font-size: 14px; line-height: 1.8; color: rgba(242,237,230,0.5); }
 .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(184,154,106,0.08); }
 .product-card { position: relative; aspect-ratio: 4/3; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
-.product-bg { position: absolute; inset: 0; }
+.product-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+.product-card:hover .product-bg { transform: scale(1.04); }
 .product-label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px, 3.5vw, 48px); color: rgba(242,237,230,0.1); letter-spacing: 0.05em; pointer-events: none; }
 .product-cat { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 8px; }
 .product-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; line-height: 1.15; color: #ffffff; }
@@ -419,131 +420,30 @@ section { padding: 140px 56px; }
 .loc-item em { color: var(--gold); font-style: normal; }
 
 /* NEWS */
-#news { background: var(--ink); }
+#news { background: var(--dark-mid); }
 .news-header { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 72px; }
-.news-sub { font-size: 15px; line-height: 1.8; color: rgba(242,237,230,0.45); }
+.news-sub { font-size: 15px; line-height: 1.8; color: rgba(242,237,230,0.5); }
 .news-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2px; background: rgba(184,154,106,0.08); }
 
 .news-card {
-  background: var(--dark-mid);
-  padding: 48px 40px;
+  background: var(--ink);
+  padding: 44px 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 32px;
+  gap: 28px;
   text-decoration: none;
   color: inherit;
   position: relative;
   overflow: hidden;
-  transition: background 0.4s;
-  min-height: 420px;
-}
-
-/* Per-card textures */
-.news-card:nth-child(1) { background: #141210; }
-.news-card:nth-child(1)::after {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: radial-gradient(rgba(184,154,106,0.06) 1px, transparent 1px);
-  background-size: 28px 28px;
-  pointer-events: none;
-}
-.news-card:nth-child(2) { background: #121414; }
-.news-card:nth-child(2)::after {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: linear-gradient(rgba(184,154,106,0.04) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(184,154,106,0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
-  pointer-events: none;
-}
-.news-card:nth-child(3) { background: #131211; }
-.news-card:nth-child(3)::after {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(184,154,106,0.03) 0px,
-    rgba(184,154,106,0.03) 1px,
-    transparent 1px,
-    transparent 20px
-  );
-  pointer-events: none;
-}
-
-/* Top accent line */
-.news-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
-  z-index: 2;
-}
-.news-card:hover::before { transform: scaleX(1); }
-.news-card:hover { background: #1a1714 !important; }
-
-/* Pull quote overlay */
-.news-pull-quote {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(10,10,10,0.97) 0%, rgba(10,10,10,0.92) 60%, rgba(10,10,10,0.7) 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 44px 40px;
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
-  z-index: 3;
-}
-.news-card:hover .news-pull-quote { opacity: 1; transform: translateY(0); }
-.pq-mark {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 72px;
-  color: var(--gold);
-  opacity: 0.3;
-  line-height: 0.6;
-  margin-bottom: 20px;
-}
-.pq-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-style: italic;
-  font-weight: 300;
-  line-height: 1.5;
-  color: rgba(242,237,230,0.9);
-  margin-bottom: 24px;
-}
-.news-card:first-child .pq-text { font-size: 26px; }
-.pq-source {
-  font-size: 10px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.pq-source::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
-.pq-cta {
-  margin-top: 28px;
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink);
-  background: var(--gold);
-  padding: 10px 20px;
-  width: fit-content;
   transition: background 0.3s;
+  min-height: 400px;
+  border-top: 2px solid transparent;
 }
-.pq-cta:hover { background: var(--gold-light); }
+.news-card:hover { background: #111009; border-top-color: var(--gold); }
 
 /* Card content */
-.news-card-top { display: flex; flex-direction: column; gap: 20px; position: relative; z-index: 1; }
+.news-card-top { display: flex; flex-direction: column; gap: 18px; }
 .news-tag {
   display: inline-flex;
   align-items: center;
@@ -555,7 +455,9 @@ section { padding: 140px 56px; }
   border: 1px solid rgba(184,154,106,0.3);
   padding: 6px 12px;
   width: fit-content;
+  transition: border-color 0.3s;
 }
+.news-card:hover .news-tag { border-color: rgba(184,154,106,0.7); }
 .news-tag-dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
 .news-headline {
   font-family: 'Cormorant Garamond', serif;
@@ -566,18 +468,13 @@ section { padding: 140px 56px; }
 }
 .news-card:first-child .news-headline { font-size: 30px; }
 .news-excerpt {
-  font-size: 13px;
-  line-height: 1.8;
-  color: rgba(242,237,230,0.45);
-  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.85;
+  color: rgba(242,237,230,0.6);
 }
 
 /* Stat callout on featured card */
-.news-stat-row {
-  display: flex;
-  gap: 2px;
-  margin-top: 8px;
-}
+.news-stat-row { display: flex; gap: 2px; margin-top: 4px; }
 .news-stat {
   flex: 1;
   background: rgba(184,154,106,0.07);
@@ -601,24 +498,48 @@ section { padding: 140px 56px; }
   margin-top: 4px;
 }
 
-.news-card-bottom { display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
+.news-card-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(184,154,106,0.1);
+}
 .news-meta { display: flex; align-items: center; justify-content: space-between; }
-.news-source { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(242,237,230,0.3); }
-.news-date { font-size: 11px; letter-spacing: 0.12em; color: rgba(242,237,230,0.2); }
+.news-source { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(242,237,230,0.4); }
+.news-date { font-size: 11px; letter-spacing: 0.12em; color: rgba(242,237,230,0.3); }
 .news-link-label {
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  opacity: 0;
-  transform: translateX(-8px);
-  transition: opacity 0.3s, transform 0.3s;
   display: flex;
   align-items: center;
   gap: 8px;
+  transition: gap 0.3s;
 }
 .news-link-label::after { content: '→'; }
-.news-card:hover .news-link-label { opacity: 1; transform: translateX(0); }
+.news-card:hover .news-link-label { gap: 14px; }
+
+/* SUSTAINABILITY */
+#sustainability { background: var(--dark-mid); }
+.sustain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 64px; align-items: start; }
+.sustain-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(184,154,106,0.08); margin-bottom: 48px; }
+.sustain-stat { background: var(--ink); padding: 40px 28px; text-align: center; }
+.sustain-stat .num { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: var(--gold); display: block; line-height: 1; }
+.sustain-stat .lbl { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ash); display: block; margin-top: 8px; }
+.sustain-infra { display: flex; flex-direction: column; gap: 0; }
+.sustain-row { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 0; border-bottom: 1px solid rgba(184,154,106,0.1); gap: 20px; }
+.sustain-row:first-child { border-top: 1px solid rgba(184,154,106,0.1); }
+.sustain-row-label { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--bone); }
+.sustain-row-detail { font-size: 12px; letter-spacing: 0.1em; color: var(--ash); text-align: right; }
+.sustain-impact { margin-top: 48px; }
+.sustain-impact-heading { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; display: flex; align-items: center; gap: 16px; }
+.sustain-impact-heading::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+.impact-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; background: rgba(184,154,106,0.08); }
+.impact-item { background: var(--ink); padding: 28px 24px; }
+.impact-year { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.impact-desc { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; line-height: 1.3; color: var(--bone); }
 
 /* CONTACT */
 #contact { background: var(--cream); color: var(--ink); }
@@ -684,6 +605,7 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
     <li><a href="#products">Products</a></li>
     <li><a href="#ethics">Ethics</a></li>
     <li><a href="#factories">Factories</a></li>
+    <li><a href="#sustainability">Sustainability</a></li>
     <li><a href="#news">News</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Get In Touch</a>
@@ -694,7 +616,7 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
   <div class="hero-bg"></div>
   <div class="hero-watermark">EALYTEX</div>
   <div class="hero-content">
-    <p class="hero-eyebrow">Est. 2016 · New York City Garment District</p>
+    <p class="hero-eyebrow">Est. 2019 · New York City</p>
     <h1 class="hero-title">
       <span class="line"><span>Built in</span></span>
       <span class="line"><span>New York.</span></span>
@@ -708,9 +630,9 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
   </div>
   <div class="hero-scroll-hint"><span class="scroll-line"></span>Scroll to explore</div>
   <div class="hero-stat-bar">
-    <div class="stat-item"><span class="stat-num">25+</span><span class="stat-label">Years Experience</span></div>
-    <div class="stat-item"><span class="stat-num">6K+</span><span class="stat-label">Global Employees</span></div>
-    <div class="stat-item"><span class="stat-num">40</span><span class="stat-label">Mfg. Sites</span></div>
+    <div class="stat-item"><span class="stat-num">5K+</span><span class="stat-label">Global Employees</span></div>
+    <div class="stat-item"><span class="stat-num">57+</span><span class="stat-label">Production Lines</span></div>
+    <div class="stat-item"><span class="stat-num">2.3M+</span><span class="stat-label">Pcs / Month</span></div>
   </div>
 </section>
 
@@ -728,15 +650,15 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
     <div class="about-graphic-wrap reveal">
       <div class="ag-inner">
         <span class="ag-est">Est.</span>
-        <span class="ag-year">2016</span>
+        <span class="ag-year">2019</span>
         <span class="ag-city">New York City</span>
         <div class="ag-line"></div>
         <span class="ag-tagline">Garment District</span>
         <div class="ag-stats">
-          <div class="ag-stat"><span>25+</span><small>Years</small></div>
-          <div class="ag-stat"><span>6K+</span><small>People</small></div>
-          <div class="ag-stat"><span>40</span><small>Sites</small></div>
-          <div class="ag-stat"><span>147K</span><small>Daily pcs</small></div>
+          <div class="ag-stat"><span>5K+</span><small>People</small></div>
+          <div class="ag-stat"><span>57+</span><small>Lines</small></div>
+          <div class="ag-stat"><span>2.3M</span><small>Pcs/mo</small></div>
+          <div class="ag-stat"><span>1.8M</span><small>Socks/mo</small></div>
         </div>
       </div>
     </div>
@@ -744,9 +666,9 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
       <div class="section-tag reveal">Our Story</div>
       <h2 class="section-heading reveal rd1">The Partner <em>Behind</em> the Brand</h2>
       <div class="divider reveal rd2"></div>
-      <p class="reveal rd2">Founded in 2016, <strong>Ealytex Global Inc.</strong> is a U.S.-based fashion manufacturer headquartered in the heart of New York City's garment district. We operate as a fully integrated partner — bringing design, development, and production together to support brands from concept through execution.</p>
-      <p class="reveal rd3">Over the years, we've partnered with some of the most recognized names in global retail including <strong>Costco, Walmart, Amazon, and Target.</strong></p>
-      <p class="reveal rd3">As niche-focused marketers with hands-on design and development expertise, we move quickly to identify emerging trends and strategically align product assortments to evolving consumer demand.</p>
+      <p class="reveal rd2">Founded in 2019, <strong>Ealytex Global Inc.</strong> is a U.S.-based fashion manufacturer headquartered in New York City. We operate as a vertically integrated partner — fabric sourcing, cut-sew, and logistics under one ownership group — supporting brands from concept through global delivery.</p>
+      <p class="reveal rd3">We are an approved and active supplier to some of the world's most recognized retailers and brands, including <strong>Walmart, Costco, PVH, Columbia Sportswear, Amazon, and Target.</strong></p>
+      <p class="reveal rd3">With 5,000+ employees across our Cambodia facilities, a proprietary fabric mill in China, and offices spanning New York, Shanghai, Suzhou, Tokyo, and beyond — we bring genuine global scale to every partnership.</p>
       <a href="#contact" class="btn-primary reveal rd4" style="margin-top:16px;">Work With Us</a>
     </div>
   </div>
@@ -832,15 +754,15 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
     <div class="adv-card reveal"><div class="adv-num">01</div><div class="adv-title">Competitive Pricing</div><div class="adv-desc">Direct manufacturing with no middlemen. We operate our own factories, offering highly competitive pricing without compromising quality or reliability.</div></div>
     <div class="adv-card reveal rd1"><div class="adv-num">02</div><div class="adv-title">Overseas Offices</div><div class="adv-desc">Four strategically located company-owned offices supporting factory evaluations, compliance oversight, production tracking, and quality assurance audits.</div></div>
     <div class="adv-card reveal rd2"><div class="adv-num">03</div><div class="adv-title">Compliance</div><div class="adv-desc">Ethical, audited, and retailer-approved. We work with factories that meet our operational and ethical standards with regular compliance audits.</div></div>
-    <div class="adv-card reveal"><div class="adv-num">04</div><div class="adv-title">Reliability</div><div class="adv-desc">Our partners count on us for consistent execution, timely deliveries, and dependable quality — season after season.</div></div>
-    <div class="adv-card reveal rd1"><div class="adv-num">05</div><div class="adv-title">Design &amp; Sourcing</div><div class="adv-desc">End-to-end product development. Our experienced team brings over 25 years of expertise in sourcing, design, and development at every stage.</div></div>
+    <div class="adv-card reveal"><div class="adv-num">04</div><div class="adv-title">99.4% On-Time Delivery</div><div class="adv-desc">Rolling 12-month average. Our partners count on consistent execution, timely deliveries, and dependable quality — measured, not marketed.</div></div>
+    <div class="adv-card reveal rd1"><div class="adv-num">05</div><div class="adv-title">Design &amp; Sourcing</div><div class="adv-desc">End-to-end product development. Our global team covers design, fabric sourcing, and development — concept to production, across every major retail channel.</div></div>
     <div class="adv-card reveal rd2"><div class="adv-num">06</div><div class="adv-title">Quality</div><div class="adv-desc">Consistent standards at every stage. From materials to production, we maintain strict controls to ensure every product meets global retail expectations.</div></div>
   </div>
   <div class="stats-band">
-    <div class="stat-block reveal"><span class="num">25+</span><span class="lbl">Years of Experience</span></div>
-    <div class="stat-block reveal rd1"><span class="num">6,000+</span><span class="lbl">Employees Globally</span></div>
-    <div class="stat-block reveal rd2"><span class="num">40</span><span class="lbl">Manufacturing Sites</span></div>
-    <div class="stat-block reveal rd3"><span class="num">147K+</span><span class="lbl">Daily Pieces Produced</span></div>
+    <div class="stat-block reveal"><span class="num">5,000+</span><span class="lbl">Employees Globally</span></div>
+    <div class="stat-block reveal rd1"><span class="num">57+</span><span class="lbl">Production Lines</span></div>
+    <div class="stat-block reveal rd2"><span class="num">2.3M+</span><span class="lbl">Garment Pcs / Month</span></div>
+    <div class="stat-block reveal rd3"><span class="num">1.8M</span><span class="lbl">Sock Pairs / Month</span></div>
   </div>
 </section>
 
@@ -948,32 +870,32 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
   </div>
   <div class="products-grid">
     <div class="product-card reveal">
-      <div class="product-bg" style="background:linear-gradient(160deg,#2c2318,#1a140c);"></div>
+      <div class="product-bg" style="background-image:url('https://images.unsplash.com/photo-1585499583264-491df5142e83?w=800&h=600&fit=crop&q=80'); background-color:#2c2318;"></div>
       <div class="product-label">SOCKS</div>
       <div class="product-info"><span class="product-cat">Category 01</span><div class="product-name">Socks</div><div class="product-desc">Our sock program spans a wide range of styles, delivering comfort, durability, and consistent quality through advanced manufacturing.</div></div>
     </div>
     <div class="product-card reveal rd1">
-      <div class="product-bg" style="background:linear-gradient(160deg,#152030,#0d1620);"></div>
+      <div class="product-bg" style="background-image:url('https://images.unsplash.com/photo-1645318800735-737d3a422de6?w=800&h=600&fit=crop&q=80'); background-color:#152030;"></div>
       <div class="product-label">ACTIVEWEAR</div>
       <div class="product-info"><span class="product-cat">Category 02</span><div class="product-name">Activewear</div><div class="product-desc">Cut-and-sew leggings, sports bras, technical outer sportswear, and athleisure styles.</div></div>
     </div>
     <div class="product-card reveal rd2">
-      <div class="product-bg" style="background:linear-gradient(160deg,#251818,#180e0e);"></div>
+      <div class="product-bg" style="background-image:url('https://images.unsplash.com/photo-1645318801217-143533cb559f?w=800&h=600&fit=crop&q=80'); background-color:#251818;"></div>
       <div class="product-label">SEAMLESS</div>
       <div class="product-info"><span class="product-cat">Category 03</span><div class="product-name">Seamless</div><div class="product-desc">Activewear and intimate undergarments using circular knitting technology and premium yarns.</div></div>
     </div>
     <div class="product-card reveal">
-      <div class="product-bg" style="background:linear-gradient(160deg,#182518,#0f180f);"></div>
+      <div class="product-bg" style="background-image:url('https://images.unsplash.com/photo-1713428856162-b2ea2e6d91a6?w=800&h=600&fit=crop&q=80'); background-color:#182518;"></div>
       <div class="product-label">MENS</div>
       <div class="product-info"><span class="product-cat">Category 04</span><div class="product-name">Men's Loungewear &amp; Pajamas</div><div class="product-desc">Comfortable, well-constructed essentials designed for everyday wear, rest, and sleep.</div></div>
     </div>
     <div class="product-card reveal rd1">
-      <div class="product-bg" style="background:linear-gradient(160deg,#22152a,#160d1a);"></div>
+      <div class="product-bg" style="background-image:url('https://images.unsplash.com/photo-1759229874709-a8d0de083b91?w=800&h=600&fit=crop&q=80'); background-color:#22152a;"></div>
       <div class="product-label">WOMENS</div>
       <div class="product-info"><span class="product-cat">Category 05</span><div class="product-name">Women's Sleepwear &amp; Loungewear</div><div class="product-desc">Woven to knit constructions spanning a full range of fabrications in lingerie and loungewear.</div></div>
     </div>
     <div class="product-card reveal rd2">
-      <div class="product-bg" style="background:linear-gradient(160deg,#1a2025,#101418);"></div>
+      <div class="product-bg" style="background-image:url('https://images.unsplash.com/photo-1773747310819-ae0ca63f5385?w=800&h=600&fit=crop&q=80'); background-color:#1a2025;"></div>
       <div class="product-label">OUTERWEAR</div>
       <div class="product-info"><span class="product-cat">Category 06</span><div class="product-name">Sweaters &amp; Outerwear</div><div class="product-desc">Thoughtfully constructed for warmth, comfort, and everyday wear across all seasons.</div></div>
     </div>
@@ -995,10 +917,12 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
         <div class="pillar reveal rd2"><div class="pillar-dot"></div><div><div class="pillar-title">Our People</div><div class="pillar-desc">Committed to fair wages, safe working conditions, and responsible workplace practices across our entire global manufacturing network.</div></div></div>
       </div>
       <div class="certs reveal rd3">
-        <div class="cert-badge">Anti-Slavery<br>Commitment</div>
-        <div class="cert-badge">Accord Fire &amp;<br>Building Safety</div>
         <div class="cert-badge">WRAP Gold<br>Certified</div>
-        <div class="cert-badge">Fair Labor<br>Association</div>
+        <div class="cert-badge">GOTS<br>Organic Standard</div>
+        <div class="cert-badge">GRS<br>Recycled Standard</div>
+        <div class="cert-badge">HIGG Index<br>FEM</div>
+        <div class="cert-badge">Better Work<br>ILO / IFC</div>
+        <div class="cert-badge">Costco GMP<br>Approved</div>
       </div>
     </div>
   </div>
@@ -1049,6 +973,19 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
         <div class="f-stat"><span class="f-key">Sewing Lines</span><span class="f-val">14</span></div>
       </div>
     </div>
+    <div class="factory-card reveal rd3">
+      <div>
+        <div class="factory-flag">🇨🇳 China</div>
+        <div class="factory-name">K&amp;M New Material Co., Ltd</div>
+        <div class="factory-desc">Proprietary fabric mill under the same ownership group — providing upstream control over raw materials, lead times, and consistent textile quality for all Ealytex garment programs.</div>
+      </div>
+      <div class="f-stats">
+        <div class="f-stat"><span class="f-key">Established</span><span class="f-val">February 2022</span></div>
+        <div class="f-stat"><span class="f-key">Location</span><span class="f-val">Tai Zhou, China</span></div>
+        <div class="f-stat"><span class="f-key">Facility Area</span><span class="f-val">32,000 m²</span></div>
+        <div class="f-stat"><span class="f-key">Monthly Capacity</span><span class="f-val">600–800 tonnes</span></div>
+      </div>
+    </div>
   </div>
   <div class="loc-marquee">
     <div class="loc-track">
@@ -1070,6 +1007,55 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
       <span class="loc-item"><em>Cambodia</em> Factories</span>
       <span class="loc-item"><em>Kenya</em> MFG Site</span>
       <span class="loc-item"><em>Egypt</em> MFG Site</span>
+    </div>
+  </div>
+</section>
+
+<!-- SUSTAINABILITY -->
+<section id="sustainability">
+  <div class="section-tag reveal">Responsibility</div>
+  <h2 class="section-heading reveal rd1">Sustainable <em>by Infrastructure</em></h2>
+  <div class="sustain-grid">
+    <div>
+      <div class="sustain-stats reveal rd1">
+        <div class="sustain-stat"><span class="num">1,320</span><span class="lbl">Solar Panels</span></div>
+        <div class="sustain-stat"><span class="num">16.3M</span><span class="lbl">kWh · 20yr</span></div>
+        <div class="sustain-stat"><span class="num">16,260</span><span class="lbl">Tonnes CO₂ Saved</span></div>
+      </div>
+      <div class="sustain-infra reveal rd2">
+        <div class="sustain-row">
+          <span class="sustain-row-label">Rooftop Solar Array</span>
+          <span class="sustain-row-detail">1,320 panels · Completed Apr 2024</span>
+        </div>
+        <div class="sustain-row">
+          <span class="sustain-row-label">Biomass Pellet Boiler</span>
+          <span class="sustain-row-detail">Renewable waste-pellet energy · 1,152 trees/yr equiv.</span>
+        </div>
+        <div class="sustain-row">
+          <span class="sustain-row-label">TONTOTON Partnership</span>
+          <span class="sustain-row-detail">Certified plastic credit system</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="reveal" style="font-size:16px;line-height:1.9;color:rgba(242,237,230,0.65);margin-bottom:32px;">Our environmental infrastructure is built-in, not bolted on. A 1,320-panel rooftop solar system completed in April 2024, a biomass pellet boiler, and a certified plastic credit partnership with TONTOTON form the foundation of our responsible manufacturing commitment.</p>
+      <div class="sustain-impact reveal rd2">
+        <div class="sustain-impact-heading">Social Impact</div>
+        <div class="impact-grid">
+          <div class="impact-item">
+            <div class="impact-year">2019 · Education</div>
+            <div class="impact-desc">Sangke Satorb Primary School — built &amp; funded</div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-year">2021 · Public Health</div>
+            <div class="impact-desc">2.2M masks &amp; 200K gowns donated during COVID-19</div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-year">2024–25 · Diplomacy</div>
+            <div class="impact-desc">US Ambassador engagement &amp; bilateral trade support</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1105,13 +1091,6 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
         </div>
         <span class="news-link-label">View on LinkedIn</span>
       </div>
-      <!-- Pull quote overlay -->
-      <div class="news-pull-quote">
-        <div class="pq-mark">"</div>
-        <div class="pq-text">Your outstanding commitment to Employee Empowerment &amp; Community Engagement continues to make a meaningful difference in improving lives across Cambodia.</div>
-        <div class="pq-source">AmCham Cambodia</div>
-        <div class="pq-cta">View Recognition →</div>
-      </div>
     </a>
 
     <!-- Card 2 -->
@@ -1128,12 +1107,6 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
         </div>
         <span class="news-link-label">View on LinkedIn</span>
       </div>
-      <div class="news-pull-quote">
-        <div class="pq-mark">"</div>
-        <div class="pq-text">Jason Ma — Founder and CEO of Ealytex Global Inc. — selected as one of 8 leading industry experts shaping the garment sector's view for 2026.</div>
-        <div class="pq-source">IBC Cambodia · Jan 2026</div>
-        <div class="pq-cta">View Feature →</div>
-      </div>
     </a>
 
     <!-- Card 3 -->
@@ -1149,12 +1122,6 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
           <span class="news-date">Jan 2026</span>
         </div>
         <span class="news-link-label">View on LinkedIn</span>
-      </div>
-      <div class="news-pull-quote">
-        <div class="pq-mark">"</div>
-        <div class="pq-text">Garment manufacturers face smaller orders and higher expectations — long-term growth is increasingly tied to execution, consistency, and clear buyer communication.</div>
-        <div class="pq-source">Jason Ma · Cambodia Investment Review</div>
-        <div class="pq-cta">Read Coverage →</div>
       </div>
     </a>
 
