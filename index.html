@@ -127,8 +127,13 @@ section { padding: 140px 56px; }
 .divider { width: 40px; height: 1px; background: var(--gold); margin: 32px 0; }
 
 /* REVEAL */
-.reveal { opacity: 1; transform: translateY(0); transition: opacity 0.75s ease, transform 0.75s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1), transform 0.85s cubic-bezier(0.16,1,0.3,1), filter 0.85s ease;
+  filter: blur(2px);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); filter: blur(0); }
 .rd1 { transition-delay: 0.1s; }
 .rd2 { transition-delay: 0.2s; }
 .rd3 { transition-delay: 0.3s; }
@@ -391,7 +396,15 @@ section { padding: 140px 56px; }
 .ethics-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
 .ethics-visual { background: linear-gradient(160deg, #0f0e0c 0%, #0d0b09 100%); display: flex; align-items: center; justify-content: center; margin: -140px 0 -140px -56px; position: relative; overflow: hidden; min-height: 700px; }
 .ethics-visual::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(184,154,106,0.06) 1px, transparent 1px); background-size: 28px 28px; }
-.ethics-quote-text { position: relative; z-index: 1; font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 2.2vw, 32px); font-style: italic; font-weight: 300; color: rgba(184,154,106,0.8); text-align: center; padding: 60px; line-height: 1.5; }
+.ethics-visual-inner { position: relative; z-index: 1; display: flex; flex-direction: column; padding: 64px 56px; width: 100%; }
+.ethics-quote-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 2vw, 28px); font-style: italic; font-weight: 300; color: rgba(184,154,106,0.85); line-height: 1.6; }
+.ethics-rule { width: 36px; height: 1px; background: var(--gold); margin: 40px 0; opacity: 0.6; }
+.ethics-metrics { display: flex; flex-direction: column; }
+.em-row { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 16px 0; border-bottom: 1px solid rgba(184,154,106,0.1); }
+.em-row:first-child { border-top: 1px solid rgba(184,154,106,0.1); }
+.em-num { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: var(--gold); line-height: 1; flex-shrink: 0; min-width: 72px; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); }
+.em-row:hover .em-num { transform: translateX(4px); }
+.em-label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(242,237,230,0.42); text-align: right; line-height: 1.5; }
 .ethics-body { padding: 80px 0 80px 80px; display: flex; flex-direction: column; justify-content: center; }
 .pillar { padding: 26px 0; border-bottom: 1px solid rgba(184,154,106,0.12); display: grid; grid-template-columns: 20px 1fr; gap: 20px; align-items: start; }
 .pillar:first-of-type { border-top: 1px solid rgba(184,154,106,0.12); }
@@ -590,9 +603,111 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
 @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
 @keyframes tickerAnim { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes logoScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── PREMIUM ANIMATION LAYER ── */
+
+/* Scroll progress bar */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; z-index: 10000;
+  height: 2px; width: 0%;
+  background: linear-gradient(to right, var(--gold), var(--gold-light));
+  transition: width 0.08s linear;
+  pointer-events: none;
+}
+
+/* Timeline node dots — removed */
+.tl-node-dot { display: none; }
+
+/* Hero watermark subtle float */
+@keyframes floatMark {
+  0%, 100% { transform: translateY(-50%); }
+  50%       { transform: translateY(-51.5%); }
+}
+.hero-watermark { animation: floatMark 10s ease-in-out infinite; }
+
+/* Section tag — line draws in on reveal */
+.section-tag::before { width: 0; transition: width 0.6s cubic-bezier(0.16,1,0.3,1) 0.2s; }
+.reveal.visible .section-tag::before,
+.section-tag { }
+.section-tag.tag-visible::before { width: 32px; }
+
+/* Stat number scale pop */
+.stat-block .num {
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), color 0.3s;
+  transform-origin: center bottom;
+}
+.stat-block:hover .num { transform: scale(1.08) translateY(-3px); }
+
+/* About graphic stat hover */
+.ag-stat {
+  transition: background 0.3s;
+  cursor: default;
+}
+.ag-stat:hover { background: rgba(184,154,106,0.12); }
+.ag-stat span { transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), color 0.3s; }
+.ag-stat:hover span { transform: scale(1.1); color: var(--bone); }
+
+/* Advantage card number lift */
+.adv-num { transition: color 0.4s, transform 0.4s cubic-bezier(0.16,1,0.3,1); transform-origin: left; }
+.adv-card:hover .adv-num { transform: scale(1.08) translateY(-4px); }
+
+/* Factory card gold left border on hover */
+.factory-card { border-left: 2px solid transparent; transition: background 0.3s, border-color 0.4s; }
+.factory-card:hover { border-left-color: var(--gold); }
+
+/* Ethics pillar indent on hover */
+.pillar { transition: padding-left 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s; }
+.pillar:hover { padding-left: 10px; }
+.pillar-dot { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s; }
+.pillar:hover .pillar-dot { transform: scale(1.5); box-shadow: 0 0 8px rgba(184,154,106,0.5); }
+
+/* Cert badge glow */
+.cert-badge { transition: border-color 0.3s, background 0.3s, box-shadow 0.3s, color 0.3s; }
+.cert-badge:hover { box-shadow: 0 0 24px rgba(184,154,106,0.2), inset 0 0 0 1px var(--gold); }
+
+/* Product card light-sweep shimmer */
+.product-card { overflow: hidden; }
+.product-card::before {
+  content: '';
+  position: absolute; top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(184,154,106,0.07), transparent);
+  transform: skewX(-15deg);
+  transition: left 0.7s cubic-bezier(0.16,1,0.3,1);
+  z-index: 3; pointer-events: none;
+}
+.product-card:hover::before { left: 150%; }
+
+/* News card slide-up stagger */
+.news-card { transition: background 0.3s, border-top-color 0.3s, transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+.news-card:hover { transform: translateY(-4px); }
+
+/* Sustainability stat hover */
+.sustain-stat { transition: background 0.3s; }
+.sustain-stat:hover { background: rgba(184,154,106,0.06); }
+.sustain-stat .num { transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), color 0.3s; }
+.sustain-stat:hover .num { transform: scale(1.06); }
+
+/* Hero CTA glow pulse */
+@keyframes ctaGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184,154,106,0); }
+  50%       { box-shadow: 0 0 28px 6px rgba(184,154,106,0.18); }
+}
+.btn-primary { animation: ctaGlow 3.5s ease-in-out infinite; }
+.btn-primary:hover { animation: none; }
+
+/* Office card lift */
+.office { transition: background 0.3s, border-color 0.3s, transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s; }
+.office:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+
+/* Impact items hover */
+.impact-item { transition: background 0.3s; }
+.impact-item:hover { background: rgba(184,154,106,0.07); }
 </style>
 </head>
 <body>
+<div id="scroll-progress"></div>
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
@@ -906,7 +1021,28 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
 <section id="ethics">
   <div class="ethics-layout">
     <div class="ethics-visual">
-      <div class="ethics-quote-text">"Our future is rooted in the people who make our products."</div>
+      <div class="ethics-visual-inner">
+        <div class="ethics-quote-text">"Our future is rooted in the people who make our products."</div>
+        <div class="ethics-rule"></div>
+        <div class="ethics-metrics">
+          <div class="em-row">
+            <span class="em-num">99.1%</span>
+            <span class="em-label">Pre-shipment quality pass rate</span>
+          </div>
+          <div class="em-row">
+            <span class="em-num">9</span>
+            <span class="em-label">Active certifications held</span>
+          </div>
+          <div class="em-row">
+            <span class="em-num">2019</span>
+            <span class="em-label">GMAC member since</span>
+          </div>
+          <div class="em-row">
+            <span class="em-num">2023</span>
+            <span class="em-label">ILO Advisory participant since</span>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="ethics-body">
       <div class="section-tag reveal">Our Values</div>
@@ -1080,7 +1216,7 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
         <div class="news-excerpt">AmCham Cambodia recognized Ealytex for its outstanding commitment to Employee Empowerment &amp; Community Engagement, making a meaningful difference across Cambodia.</div>
         <div class="news-stat-row">
           <div class="news-stat"><span class="news-stat-num" data-target="7">0</span><span class="news-stat-lbl">Annual Award</span></div>
-          <div class="news-stat"><span class="news-stat-num" data-target="3000+">0</span><span class="news-stat-lbl">Workers Empowered</span></div>
+          <div class="news-stat"><span class="news-stat-num" data-target="3113">0</span><span class="news-stat-lbl">Workers Empowered</span></div>
           <div class="news-stat"><span class="news-stat-num" data-target="2020">0</span><span class="news-stat-lbl">Est. Cambodia</span></div>
         </div>
       </div>
@@ -1257,6 +1393,65 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
     statNums.forEach(el => counterObserver.observe(el));
   }
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // Scroll progress bar
+  const progressBar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    progressBar.style.width = (scrolled / total * 100) + '%';
+  }, { passive: true });
+
+  // Section tag line draw on visibility
+  const tagObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('tag-visible');
+        tagObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.section-tag').forEach(el => tagObserver.observe(el));
+
+  // Count-up for stat blocks and sustainability stats
+  function animateCount(el) {
+    const raw = el.textContent.trim();
+    const hasDecimal = /[\d]+\.[\d]+/.test(raw);
+    const numMatch = raw.match(/[\d,\.]+/);
+    if (!numMatch) return;
+    const numStr = numMatch[0].replace(/,/g, '');
+    const target = parseFloat(numStr);
+    const suffix = raw.replace(/[\d,\.]+/, '');
+    const duration = 1800;
+    const start = performance.now();
+    const animate = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = eased * target;
+      let display;
+      if (hasDecimal) {
+        display = current.toFixed(1);
+      } else if (target >= 1000) {
+        display = Math.floor(current).toLocaleString();
+      } else {
+        display = Math.floor(current).toString();
+      }
+      el.textContent = display + suffix;
+      if (progress < 1) requestAnimationFrame(animate);
+      else el.textContent = (target >= 1000 && !hasDecimal ? target.toLocaleString() : (hasDecimal ? target.toFixed(1) : target)) + suffix;
+    };
+    requestAnimationFrame(animate);
+  }
+
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        countObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.stat-block .num, .sustain-stat .num').forEach(el => countObserver.observe(el));
 </script>
 </body>
 </html>
