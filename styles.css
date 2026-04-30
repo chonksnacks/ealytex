@@ -411,7 +411,7 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
   .hero-stat-bar { gap: 36px; right: 32px; }
   .hero-scroll-hint { left: 32px; }
   .about-grid { grid-template-columns: 1fr; gap: 48px; }
-  .about-graphic-wrap { height: 340px; }
+  .about-graphic-wrap { height: auto; min-height: 0; padding: 48px 32px; }
   .clients-head { grid-template-columns: 1fr; padding: 0 32px; }
   .adv-grid { grid-template-columns: 1fr 1fr; }
   .stats-band { grid-template-columns: 1fr 1fr; }
@@ -446,8 +446,13 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
   .hero-actions { flex-direction: column; align-items: flex-start; gap: 16px; }
 
   /* About */
-  .ag-year { font-size: 80px; }
-  .about-graphic-wrap { height: 280px; }
+  .ag-year { font-size: 68px; }
+  .ag-city { font-size: 20px; }
+  .ag-tagline { margin-bottom: 24px; }
+  .about-graphic-wrap { height: auto; min-height: 0; padding: 40px 20px; }
+  .ag-stats { max-width: 100%; }
+  .ag-stat { padding: 16px 12px; }
+  .ag-stat span { font-size: 34px; }
   .about-text p { font-size: 15px; }
 
   /* Clients */
@@ -456,10 +461,14 @@ footer { background: var(--ink); padding: 48px 56px; display: flex; align-items:
   .logo-slide img { height: 36px; width: 120px; }
 
   /* Advantages */
-  .adv-grid { grid-template-columns: 1fr; }
+  .adv-grid { grid-template-columns: 1fr 1fr; }
+  .adv-card { padding: 28px 20px; }
+  .adv-num { font-size: 44px; margin-bottom: 8px; }
+  .adv-title { font-size: 22px; margin-bottom: 8px; }
+  .adv-desc { font-size: 13px; line-height: 1.65; }
   .stats-band { grid-template-columns: 1fr 1fr; }
-  .stat-block { padding: 36px 20px; }
-  .stat-block .num { font-size: 52px; }
+  .stat-block { padding: 32px 16px; }
+  .stat-block .num { font-size: 48px; }
 
   /* Services timeline — vertical */
   .services-header { margin-bottom: 56px; }
