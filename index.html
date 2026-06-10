@@ -31,7 +31,7 @@
   <div class="hero-bg"></div>
   <div class="hero-watermark">EALYTEX</div>
   <div class="hero-content">
-    <p class="hero-eyebrow">Est. 2019 · New York City</p>
+    <p class="hero-eyebrow">Est. 2015 · New York City</p>
     <h1 class="hero-title">
       <span class="line"><span>Sourcing</span></span>
       <span class="line"><span>Intelligence.</span></span>
@@ -57,7 +57,7 @@
     <div class="about-graphic-wrap reveal">
       <div class="ag-inner">
         <span class="ag-est">Est.</span>
-        <span class="ag-year">2019</span>
+        <span class="ag-year">2015</span>
         <span class="ag-city">New York City</span>
         <div class="ag-line"></div>
         <span class="ag-tagline">Garment District</span>
@@ -73,7 +73,7 @@
       <div class="section-tag reveal">About Ealytex</div>
       <h2 class="section-heading reveal rd1">A Sourcing Partner <em>Built for Modern Brands</em></h2>
       <div class="divider reveal rd2"></div>
-      <p class="reveal rd2">Ealytex started in 2019 in a 39th Street office with one conviction: brands were wasting too much time sourcing and not enough building product. <span class="years-word" data-case="title">Six</span> years later, we run full programs for some of retail's biggest names.</p>
+      <p class="reveal rd2">Ealytex started in 2015 in a 39th Street office with one conviction: brands were wasting too much time sourcing and not enough building product. <span class="years-word" data-case="title">Six</span> years later, we run full programs for some of retail's biggest names.</p>
       <p class="reveal rd3">We're not a factory. Not a broker. We're the team that finds the right manufacturing partner for your specific program, builds the sample, manages QC from in-line to pre-shipment, and gets goods to your warehouse. The brands we work with stop thinking about sourcing. <strong>That's our mission.</strong></p>
       <p class="reveal rd3">Category depth in socks, activewear, seamless, loungewear, sleepwear, and outerwear. 200+ vetted partners across 18 countries. Based in New York, where the market lives.</p>
       <a href="#contact" class="btn-primary reveal rd4" style="margin-top:16px;">Start a Sourcing Conversation</a>
@@ -160,7 +160,7 @@
       <div class="section-tag reveal">Why Ealytex</div>
       <h2 class="section-heading reveal rd1">The Sourcing <em>Edge</em> You Need</h2>
     </div>
-    <p class="why-statement reveal rd1">"Since 2019, we've built relationships with the manufacturers that take most companies a decade to find."</p>
+    <p class="why-statement reveal rd1">"Since 2015, we've built relationships with the manufacturers that take most companies a decade to find."</p>
   </div>
   <div class="why-grid">
 
@@ -337,7 +337,7 @@
     <div class="network-card reveal">
       <div class="network-region">Southeast Asia</div>
       <div class="network-countries">Cambodia<br>Vietnam<br>Indonesia</div>
-      <div class="network-focus">Cambodia and Vietnam have quietly become the most reliable cut-and-sew corridor for U.S.-bound apparel. Experienced workforce & compliance infrastructure already in place. We've been working here since 2019.</div>
+      <div class="network-focus">Cambodia and Vietnam have quietly become the most reliable cut-and-sew corridor for U.S.-bound apparel. Experienced workforce & compliance infrastructure already in place. We've been working here since 2015.</div>
     </div>
 
     <div class="network-card reveal rd1">
@@ -404,7 +404,7 @@
   <div class="contact-address reveal rd3">
     <div class="ca-city">New York</div>
     <div class="ca-right">
-      <div class="ca-tag">Garment District · Est. 2019</div>
+      <div class="ca-tag">Garment District · Est. 2015</div>
       <div class="ca-addr">225 W. 39th Street, 8th Floor · New York, NY 10018 · United States</div>
     </div>
   </div>
@@ -412,7 +412,7 @@
 
 <footer>
   <div class="footer-logo">EALYTEX<span>.</span></div>
-  <p class="footer-copy">© 2026 Ealytex Global Inc. All rights reserved. · New York City</p>
+  <p class="footer-copy">© <span id="current-year"></span> Ealytex Global Inc. All rights reserved. · New York City</p>
   <ul class="footer-links">
     <li><a href="#about">About</a></li>
     <li><a href="#why">Why Us</a></li>
@@ -423,16 +423,22 @@
 </footer>
 
 <script>
-// ── DYNAMIC "YEARS SINCE 2019" ──
+// ── DYNAMIC "YEARS SINCE 2015" ──
 (function() {
   const numberWords = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen'];
-  const years = new Date().getFullYear() - 2019;
+  const years = new Date().getFullYear() - 2015;
   const word = numberWords[years] || String(years);
   document.querySelectorAll('.years-word').forEach(el => {
     el.textContent = el.dataset.case === 'title'
       ? word.charAt(0).toUpperCase() + word.slice(1)
       : word;
   });
+})();
+
+// ── DYNAMIC COPYRIGHT YEAR ──
+(function() {
+  const el = document.getElementById('current-year');
+  if (el) el.textContent = new Date().getFullYear();
 })();
 
 // ── SCROLL PROGRESS BAR ──
